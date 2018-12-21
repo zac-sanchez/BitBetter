@@ -1,6 +1,5 @@
-import zipfile, requests, pickle, os, sqlite3
+import zipfile, requests, os, sqlite3
 import pandas as pd
-
 
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
@@ -54,7 +53,7 @@ def unzip_data():
         with zipfile.ZipFile(zip_path) as zip_ref:
             zip_ref.extractall()
             os.rename('./database.sqlite', target_path)
-            os.remove('./data/football_data.zip')
+        os.remove('./data/football_data.zip')
 
 def pickle_data():
     path = './data/football_data.sqlite'
@@ -92,11 +91,12 @@ def pickle_data():
         team_df.to_pickle("./data/team_data.pkl")
         player_df = pd.read_sql(england_player_qyery, conn)
         player_df.to_pickle("./data/player_data.pkl")
+        conn.close()
         os.remove('./data/football_data.sqlite')
 
     except sqlite3.Error as e:
         print(e)
-        sys.exit(1)
+        exit(1)
 
 def get_data():
     if not os.path.exists('./data/match_data.pkl') or not os.path.exists('./data/team_data.pkl') or not os.path.exists('./data/player_data.pkl'):
