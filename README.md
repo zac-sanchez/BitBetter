@@ -1,6 +1,6 @@
-# iBetter 
+# I am a BitBetter! 
 
-This is a personal project where I will be creating a framework to automate betting on football matches and to better determine outcomes of games.
+A platform for aggregating data to better inform sports betting decisions. BitBetter automatically generates a basket of metrics based on historic sports data.
 
 
 
